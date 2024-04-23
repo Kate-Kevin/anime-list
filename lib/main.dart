@@ -1,4 +1,6 @@
+import 'package:anime_list/feature/animeSeason/presentation/bloc/season_anime_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'feature/animeSeason/presentation/pages/season_anime_home_page.dart';
@@ -16,9 +18,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: Home()
+    return  MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SeasonAnimeBloc()..add(StartAnimeSeason()),
+        )
+      ],
+      child: const MaterialApp(
+        title: 'Flutter Demo',
+        home: Home()
+      ),
     );
   }
 }

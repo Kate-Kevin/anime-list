@@ -7,7 +7,7 @@ class SeasonAnimeRepositoryImp implements SeasonAnimeRepository {
   @override
   Future getSeasonAnime({required String season, required int year}) async {
     try {
-      SeasonAnimeModel seasonAnime =
+      final List<SeasonAnimeModel> seasonAnime =
           await SeasonAnimeAPI().getSeasonAnimeAPI(season: season, year: year);
       return seasonAnime;
     } catch (e) {
