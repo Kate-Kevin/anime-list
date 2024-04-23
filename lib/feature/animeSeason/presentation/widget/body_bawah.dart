@@ -39,13 +39,13 @@ class _BodyBawahState extends State<BodyBawah> {
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               width: double.infinity,
+                              color: const Color.fromARGB(150, 0, 0, 0),
                               child: Text(
                                 'judul',
                                 textAlign: TextAlign.center,
                                 softWrap: true,
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
-                              color: Color.fromARGB(150, 0, 0, 0),
                             ),
                           )
                         ],
