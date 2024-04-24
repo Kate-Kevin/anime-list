@@ -10,14 +10,15 @@ class SeasonAnimeAPI {
   try {
     final String clientID = dotenv.env['API_KEY']!;
     final String seasonURL = dotenv.env['URL_SEASON']!;
-    final uri = Uri.parse('$seasonURL/$year/$season');
+    const String limit = 'limit=50';
+    final uri = Uri.parse('$seasonURL/$year/$season?$limit');
     final response =
         await http.get(uri, headers: {"X-MAL-CLIENT-ID": clientID});
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final List<dynamic> animeNode = data['data'];
-      final Iterable<SeasonAnimeModel>animes = animeNode.map((node) => SeasonAnimeModel.fromJson(node));
+      final List<SeasonAnimeModel>animes = animeNode.map((node) => SeasonAnimeModel.fromJson(node)).toList();
 
       return animes;
 

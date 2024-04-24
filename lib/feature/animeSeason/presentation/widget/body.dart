@@ -1,8 +1,10 @@
+import 'package:anime_list/feature/animeSeason/presentation/bloc/season_anime_bloc.dart';
 import 'package:anime_list/feature/animeSeason/presentation/widget/body_atas.dart';
 import 'package:anime_list/feature/animeSeason/presentation/widget/body_bawah.dart';
 import 'package:anime_list/feature/animeSeason/presentation/widget/body_pembatas.dart';
 import 'package:anime_list/shared/season_and_year.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BodyWidget extends StatefulWidget {
   const BodyWidget({super.key});
@@ -13,18 +15,24 @@ class BodyWidget extends StatefulWidget {
 
 class _BodyWidgetState extends State<BodyWidget> {
   String selectedSeason = getCurrentSeason();
-  String selectedYear = getCurrentYearString();
+  int selectedYear = getCurrentYear();
 
   void updateSeason(String season) {
     setState(() {
       selectedSeason = season;
     });
+    if (selectedYear != getCurrentYear()) {
+      BlocProvider.of<SeasonAnimeBloc>(context)
+          .add(LoadAnimeSeason(season: selectedSeason, year: selectedYear));
+    }
   }
 
-  void updateYear(String year) {
+  void updateYear(int year) {
     setState(() {
       selectedYear = year;
     });
+    BlocProvider.of<SeasonAnimeBloc>(context)
+          .add(LoadAnimeSeason(season: selectedSeason, year: selectedYear));
   }
 
   @override
@@ -37,10 +45,19 @@ class _BodyWidgetState extends State<BodyWidget> {
           child: Column(
             children: [
               BodyAtas(updateSeason: updateSeason, updateYear: updateYear),
-              const SizedBox(height: 10,),
-              BodyPembatas(season: selectedSeason,year: selectedYear,),
-              const SizedBox(height: 10,),
-              BodyBawah(selectedSeason: selectedSeason, selectedYear: selectedYear),
+              const SizedBox(
+                height: 10,
+              ),
+              BodyPembatas(
+                season: selectedSeason,
+                year: selectedYear.toString(),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              BodyBawah(
+                  selectedSeason: selectedSeason,
+                  selectedYear: selectedYear.toString()),
             ],
           ),
         ));
