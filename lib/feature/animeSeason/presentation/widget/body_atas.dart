@@ -5,7 +5,7 @@ import 'drop_down_button_season.dart';
 
 class BodyAtas extends StatelessWidget {
   final Function(String) updateSeason;
-  final Function(String) updateYear;
+  final Function(int) updateYear;
 
   const BodyAtas(
       {super.key, required this.updateSeason, required this.updateYear});

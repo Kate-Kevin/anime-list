@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DropDownSeason extends StatefulWidget {
   final List<String> item;
-  final Function(String) onSeasonChange;
+  final Function onSeasonChange;
   final String current;
   final bool isSeason;
 
@@ -53,7 +53,13 @@ class _DropDownSeasonState extends State<DropDownSeason> {
               onChanged: (value) {
                 setState(() {
                   selected = value!;
-                  widget.onSeasonChange(value);
+                  if (int.tryParse(value)==null) {
+                    widget.onSeasonChange(value);
+                  } else {
+                    int intYear = int.parse(value);
+                    widget.onSeasonChange(intYear);
+                  }
+                  
                 });
               }),
         ),
