@@ -16,7 +16,7 @@ class StartAnimeSeason extends SeasonAnimeEvent{
 
 class LoadAnimeSeason extends SeasonAnimeEvent{
   final String season;
-  final String year;
+  final int year;
 
   const LoadAnimeSeason({required this.season, required this.year});
 

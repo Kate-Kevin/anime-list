@@ -1,5 +1,4 @@
 import 'package:anime_list/shared/loading.dart';
-import 'package:anime_list/shared/season_and_year.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +16,6 @@ class BodyBawah extends StatefulWidget {
 }
 
 class _BodyBawahState extends State<BodyBawah> {
-  final season = listSeason(); //contoh item
 
   @override
   Widget build(BuildContext context) {

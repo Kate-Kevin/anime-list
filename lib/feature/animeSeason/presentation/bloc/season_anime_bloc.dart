@@ -11,6 +11,7 @@ part 'season_anime_state.dart';
 class SeasonAnimeBloc extends Bloc<SeasonAnimeEvent, SeasonAnimeState> {
   SeasonAnimeBloc() : super(SeasonAnimeLoading()) {
     on<StartAnimeSeason>(_onStartAnimeSeason);
+    on<LoadAnimeSeason>(_onLoadAnimeSeason);
   }
 
   void _onStartAnimeSeason(StartAnimeSeason event, Emitter<SeasonAnimeState> emit)async{
@@ -18,7 +19,9 @@ class SeasonAnimeBloc extends Bloc<SeasonAnimeEvent, SeasonAnimeState> {
     try {
       final season = getCurrentSeason();
       final year = getCurrentYear();
-      final anime = await UseSeasonAnime().call(season: season, year: year);
+      final List<SeasonAnimeEntity> anime = await UseSeasonAnime().call(season: season, year: year);
+
+      anime.sort((a,b)=>a.node.title.compareTo(b.node.title));
       
       emit(SeasonAnimeLoaded(anime: anime));
     } catch (err) {
@@ -26,5 +29,18 @@ class SeasonAnimeBloc extends Bloc<SeasonAnimeEvent, SeasonAnimeState> {
     }
   }
 
+  void _onLoadAnimeSeason(LoadAnimeSeason event, Emitter<SeasonAnimeState> emit)async{
+    emit(SeasonAnimeLoading());
+    try {
+      final season = event.season;
+      final year = event.year;
+      final List<SeasonAnimeEntity> anime = await UseSeasonAnime().call(season: season, year: year);
 
+      anime.sort((a,b)=>a.node.title.compareTo(b.node.title));
+
+      emit(SeasonAnimeLoaded(anime: anime));
+    } catch (err) {
+      emit(SeasonAnimeError(error: err.toString()));
+    }
+  }
 }
