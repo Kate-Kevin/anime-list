@@ -19,17 +19,10 @@ class DropDownSeason extends StatefulWidget {
 
 class _DropDownSeasonState extends State<DropDownSeason> {
   late String selected;
-  late int index;
-
-  @override
-  void initState() {
-    super.initState();
-    index = widget.item.indexWhere((element) => element == widget.current);
-    selected = widget.isSeason ? '-Season-' : '-Year-';
-  }
 
   @override
   Widget build(BuildContext context) {
+    selected = widget.isSeason ? '-Season-' : '-Year-';
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(

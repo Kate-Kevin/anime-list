@@ -1,3 +1,5 @@
+import 'package:anime_list/feature/animeDetail/presentation/bloc/detail_anime_bloc.dart';
+import 'package:anime_list/feature/animeDetail/presentation/pages/anime_detail_page.dart';
 import 'package:anime_list/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,6 @@ class BodyBawah extends StatefulWidget {
 }
 
 class _BodyBawahState extends State<BodyBawah> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SeasonAnimeBloc, SeasonAnimeState>(
@@ -37,17 +38,25 @@ class _BodyBawahState extends State<BodyBawah> {
                               crossAxisCount: 2),
                       itemBuilder: (BuildContext context, int index) {
                         final anime = state.anime[index];
-
                         return Padding(
                           padding: const EdgeInsets.all(15),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              BlocProvider.of<DetailAnimeBloc>(context).add(LoadAnimeDetail(id: anime.node.id));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AnimeDetail(
+                                          image:
+                                              anime.node.picture.large)));
+                              
+                            },
                             child: Card(
                               child: Stack(
                                 children: [
                                   Center(
                                     child: Image.network(
-                                      anime.node.mainPicture.medium,
+                                      anime.node.picture.medium,
                                       fit: BoxFit.cover,
                                     ),
                                   ),

@@ -7,10 +7,14 @@ class UseSeasonAnime {
   final SeasonAnimeRepository repository = SeasonAnimeRepositoryImp();
 
   Future call({required String season, required int year}) async {
+
     final List<SeasonAnimeModel> animeModel =
         await repository.getSeasonAnime(season: season, year: year);
+        
+    // harusnya di repo
     final List<SeasonAnimeEntity> animeEntity =
         animeModel.map((model) => SeasonAnimeEntity.fromModel(model)).toList();
+        
     return animeEntity;
   }
 }
