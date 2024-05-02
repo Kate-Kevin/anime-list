@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 class SeasonAnimeAPI {
   Future getSeasonAnimeAPI({required String season, required int year}) async {
   try {
-    final String clientID = dotenv.env['API_KEY']!;
-    final String seasonURL = dotenv.env['URL_SEASON']!;
+    final String clientID = dotenv.env['API_KEY']! ;
+    final String seasonURL = dotenv.env['URL_SEASON']! ;
     const String limit = 'limit=50';
     final uri = Uri.parse('$seasonURL/$year/$season?$limit');
     final response =
@@ -30,6 +30,7 @@ class SeasonAnimeAPI {
     }
   } catch (e) {
     debugPrint('Error: $e');
+    
   }
 }
 }
