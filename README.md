@@ -1,16 +1,13 @@
 # anime_list
 
-A new Flutter project.
+Aplikasi untuk menampilkan list anime pada musim yang di tentukan
 
-## Getting Started
+## Apa yang saya pelajari?
 
-This project is a starting point for a Flutter application.
+-Membuat UI basic
 
-A few resources to get you started if this is your first Flutter project:
+-Menjalankan permintaan API dari MyAnimeList
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-Mengimplementasikan arsitektur bersih 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-Menggunakan manajemen state BLoC
